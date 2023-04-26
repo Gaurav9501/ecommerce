@@ -1,12 +1,12 @@
 import { Box } from '@mui/material'
 import React from 'react'
 import Footer from '../Footer'
-import Banner from './Banner'
-import Banner2 from './Banner2'
-import Handpicked from './Handpicked'
-import Hero from './Hero'
-import NewArrivals from './NewArrivals'
-import ShopByBrands from './ShopByBrands'
+import Banner from '../Banner/Banner'
+import Banner2 from '../Banner/Banner2'
+import Handpicked from '../HandPicked/Handpicked'
+import Hero from '../Hero/Hero'
+import NewArrivals from '../NewArrival/NewArrivals'
+import ShopByBrands from '../ShopByBrand/ShopByBrands'
 
 const Home = () => {
   return (

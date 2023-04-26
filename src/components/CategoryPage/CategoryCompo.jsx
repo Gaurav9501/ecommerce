@@ -1,20 +1,22 @@
 import { Box, Checkbox, Divider, FormControlLabel, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import Banner from '../HomePage/Banner'
-import Hero from '../HomePage/Hero'
+import Banner from '../Banner/Banner'
+import Hero from '../Hero/Hero'
 import ProductCard from '../HomePage/ProductCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router'
 import { getProdyctByCategory } from '../../services/service'
 import AppsIcon from '@mui/icons-material/Apps';
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
+import { useNavigate } from 'react-router'
+
+
 const CategoryCompo = ({ categoryType = "Handbags" }) => {
 
+  const navigate = useNavigate();
   const { state } = useLocation();
   const { category } = state
   const dispatch = useDispatch();
-  const [size, setSize] = useState(false)
-  const [colo, setColo] = useState(false)
 
   const [smallCheck, setSmallCheck] = useState(false)
   const [mediumCheck, setMediumCheck] = useState(false)
@@ -24,13 +26,14 @@ const CategoryCompo = ({ categoryType = "Handbags" }) => {
   
   // const cato = useSelector((state)=>{return state.category})
 
-  const navigateToProductDetails = (data)=>{
-    
+  const handleNavigate = ()=>{
+
   }
+  
   useEffect(() => {
     dispatch(getProdyctByCategory(category))
   }, [])
-
+ 
   return (
     <Box>
       <Banner></Banner>
@@ -48,7 +51,7 @@ const CategoryCompo = ({ categoryType = "Handbags" }) => {
               <Typography variant='h5' fontWeight="bold">Size</Typography>
             </Box>
 
-            {size && (
+            {/* {size && ( */}
               <Box display="flex" flexDirection="column">
                 <FormControlLabel
                   label="small"
@@ -67,7 +70,7 @@ const CategoryCompo = ({ categoryType = "Handbags" }) => {
                   control={<Checkbox checked={largeCheck} onChange={() => { setLargeCheck((preSize) => { return !preSize }) }} />}
                 />
               </Box>
-            )}
+            {/* )} */}
           </Box>
 
           {/* Color */}
@@ -76,7 +79,7 @@ const CategoryCompo = ({ categoryType = "Handbags" }) => {
             <Box display="flex">
               <Typography variant="h5" fontWeight="bold">Color</Typography>
             </Box>
-            {colo && (
+            {/* {colo && ( */}
               <Box display="flex" flexDirection="column">
                 <FormControlLabel
                   label="Blue"
@@ -121,7 +124,7 @@ const CategoryCompo = ({ categoryType = "Handbags" }) => {
                   control={<Checkbox />}
                 />
               </Box>
-            )}
+            {/* )} */}
           </Box>
 
           {/* Brand */}
@@ -144,9 +147,7 @@ const CategoryCompo = ({ categoryType = "Handbags" }) => {
          */}
 
         {/* pagination */}
-        <Box display="flex">
-
-        </Box>
+        <Box display="flex"> </Box>
 
         {/* actual data */}
         <Box>
@@ -165,10 +166,7 @@ const CategoryCompo = ({ categoryType = "Handbags" }) => {
             </Box>
 
             {cato.map((product) => (
-              <ProductCard
-               imageURL={product.imageURL} name={product.name} price={product.price}
-                onClick={navigateToProductDetails(product)}
-               />))}
+              <ProductCard product={product} />))}
           </Box>
         </Box>
       </Box>
@@ -177,26 +175,6 @@ const CategoryCompo = ({ categoryType = "Handbags" }) => {
 }
 
 export default CategoryCompo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

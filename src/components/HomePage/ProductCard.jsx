@@ -2,57 +2,27 @@ import { Box, Card, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-const ProductCard = (
-    {imageURL,
-        name,
-        price,
-        category="none",
-        width="220px",
-        height="220px",
-        cardDefaultWidth ="250px",
-        cardDefaultHeight="350px",
-        rounded="false",
-        isCategory
-    }) => {
+import ProductDetails from '../ProductDetails/ProductDetails';
 
-  
-   const navigate = useNavigate();
-  
-   
-   const handleCategory = ()=>{
-      console.log("called category")
-      navigate("/category",{state:{category}})
-   }
+const ProductCard = ({ product }) => {
 
-   const handleNewArrival =()=>{
-    console.log("called arrival")
-   }
-   
+  const navigate = useNavigate();
+ const handleNavigate = ()=>{
+   console.log("clicked")
+  navigate("/productDetails", {state:{product} })
+ }
   return (
-      <Box >
-      <Card  sx={{
-          width:cardDefaultWidth, 
-          height:cardDefaultHeight,
-          borderRadius: rounded!=='false' ?"20px":"0px"
-          }}>
+    <Box >
+      <Card sx={{ width: "250px", height: "350px",cursor:"pointer"}} onClick={handleNavigate} >
 
-        {/* <Link  onClick={isCategory==="true"?handleCategory:handleNewArrival}>
-        <img style={{width:width, height:height}}  src={imageURL} alt="#" />
-          </Link>
-           */}
-         
-            {/*  */}
-            <button style={{border:"none",cursor:"pointer"}}  onClick={isCategory==="true"?handleCategory:handleNewArrival}>
-        <img style={{width:width, height:height}}  src={imageURL} alt="#" />
-          </button>
-         
-           {/*  */}   
-          {name && (<Typography variant="h6" >{name}</Typography>)}
-          {category && (<Typography variant="h6" sx={{color:"lightgray"}}>{category}</Typography>)}
-          { price &&(<Typography variant="h6">{price}</Typography>)}
-,
+        <button  style={{ border: "none", cursor: "pointer" }}  >
+          <img style={{ width: "220px", height: "220px" }} src={product.imageURL} alt="#" />
+        </button>
+        <Typography variant="h6" >{product.name}</Typography>
+        {/* <Typography variant="h6" sx={{color:"lightgray"}}>{category}</Typography> */}
+        <Typography variant="h6">{product.price}</Typography>
       </Card>
-      </Box>
+    </Box>
   )
 }
 
